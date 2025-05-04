@@ -38,4 +38,14 @@ app.post('/reserve', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
+// Inside server.js
+app.get('/submissions', (req, res) => {
+  db.all("SELECT * FROM reservations", (err, rows) => {
+    if (err) {
+      res.status(500).send("Error retrieving data");
+    } else {
+      res.json(rows); // or res.send(rows)
+    }
+  });
+});
 });
